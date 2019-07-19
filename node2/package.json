@@ -1,0 +1,15 @@
+{
+  "name": "tree",
+  "version": "1.0.0",
+  "description": "Home work 3",
+  "main": "tree.js",
+  "scripts": {
+    "test": "npm run tree -- foo",
+    "tree": "node tree.js"
+  },
+  "keywords": [
+    "tree"
+  ],
+  "author": "Suslov A.V.",
+  "license": "ISC"
+}
