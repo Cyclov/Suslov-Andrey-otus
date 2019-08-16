@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   <div>
+       <p>first elem</p>
+       <p>second elem</p>
+       <p>third elem</p>
+   </div>
+
+    <div>
+       <ul>
+            <li>1</li>
+            <li id='test2'> 2</li>
+            <li>3</li>
+            <p> test</p>
+        </ul>
+    </div> 
+
+    <script>
+
+            GetElemSelector = (elem) =>{
+            if (elem.tagName === 'BODY') {
+                 return 'body';
+             }   
+            let children = Array.from(elem.parentElement.children);
+            if (children.length  === 1) {
+                return ' > ' + elem.tagName.toLowerCase() ;
+            }
+            elemIndex = children.indexOf(elem) + 1;
+            return ' > '+ elem.tagName.toLowerCase() + ':nth-child('+elemIndex+')';
+            }
+            
+            GetPath = (elem) =>{
+                let selector = '';
+                let returnedSelector = '';
+              while ( elem.parentElement != null)  
+                {
+                    returnedSelector = GetElemSelector(elem);
+                    selector = returnedSelector +selector; 
+                    elem = elem.parentElement;
+                } 
+            return selector;
+            }
+            //test 1
+            elem = document.getElementById("test2");
+            pathElem = GetPath(elem);
+            console.log(pathElem);
+            console.log( document.querySelector(pathElem) == elem);
+            //test 2
+            elem = document.querySelector('body');
+            pathElem = GetPath(elem);
+            console.log(pathElem);
+            console.log( document.querySelector(pathElem) == elem);
+
+            //test 3 
+            elem = document.querySelector('body > div:nth-child(2) > ul > p');
+            pathElem = GetPath(elem);
+            console.log(pathElem);
+            console.log( document.querySelector(pathElem) == elem);
+            
+            //test 4 
+            elem = document.querySelector('body > div:nth-child(1) > p:nth-child(3)');
+            pathElem = GetPath(elem);
+            console.log(pathElem);
+            console.log( document.querySelector(pathElem) == elem);
+
+            </script>
+</body>
+
+
+</html>
